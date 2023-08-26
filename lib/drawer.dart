@@ -1,3 +1,4 @@
+import 'package:attendance_app/attendance_check.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceDrawer extends StatelessWidget{
@@ -21,7 +22,9 @@ class AttendanceDrawer extends StatelessWidget{
           ListTile(
             leading: Icon(Icons.check),
             title: Text("출석 체크"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AttendanceCheckScreen()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.list),
