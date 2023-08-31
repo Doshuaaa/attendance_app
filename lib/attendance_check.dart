@@ -1,6 +1,8 @@
 import 'package:attendance_app/drawer.dart';
+import 'package:attendance_app/firebase_process.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AttendanceCheckScreen extends StatefulWidget {
 
@@ -15,6 +17,8 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
 
   @override
   void initState() {
+    FirebaseProcess process = FirebaseProcess();
+    //process.addStudentData();
     super.initState();
     currentSetDay = getToday();
   }
@@ -42,7 +46,49 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
                   });
                 }, icon: const Icon(Icons.chevron_right))
               ],
-            )
+            ),
+            Text("출석자 명단"),
+            Expanded(
+              // width: double.infinity,
+              //   height: 300,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${index}번 김하루"),
+                        ElevatedButton(
+                          onPressed: () {
+
+                          },
+                          child: const Text("결석으로 변경"),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                        )
+                      ],
+                    );
+                  },
+                )
+            ),
+            Text("결석자 명단"),
+            Expanded(
+                // width: double.infinity,
+                // height: 300,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${index}번 김하루"),
+                        ElevatedButton(onPressed: () {}, child: const Text("출석으로 변경"))
+                      ],
+                    );
+                  },
+                )
+            ),
           ],
         ),
     );
@@ -74,16 +120,20 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
     DateTime time = DateTime.parse(day);
     DateFormat format = DateFormat('yyyy-MM-dd');
 
+
     DateTime? picked = await showDatePicker(
+
         context: context,
         initialDate: time,
         firstDate: DateTime(2016),
-        lastDate: DateTime(2030)
+        lastDate: DateTime(2030),
+
     );
+
     if(picked != null) {
       setState(() {
       currentSetDay = format.format(picked);
-    });
+      });
     }
   }
 }

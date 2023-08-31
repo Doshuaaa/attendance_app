@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:352482401977:ios:028e0879bbaeb4190cc568",
-  "FIREBASE_PROJECT_ID": "attendance-app-flutter-project",
-  "GCM_SENDER_ID": "352482401977"
+  "GOOGLE_APP_ID": "1:584975465730:ios:4fab80fc73bb512b09161b",
+  "FIREBASE_PROJECT_ID": "attendanceproj-15caf",
+  "GCM_SENDER_ID": "584975465730"
 }

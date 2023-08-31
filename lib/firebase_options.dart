@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAqHryTL1-jZU7EuGiw9w0FHVqvh4VJp38',
-    appId: '1:352482401977:android:97bf107d8b611f170cc568',
-    messagingSenderId: '352482401977',
-    projectId: 'attendance-app-flutter-project',
-    storageBucket: 'attendance-app-flutter-project.appspot.com',
+    apiKey: 'AIzaSyBG3RN9U0wQYdiWUrugUGE2_CxJgHc9WLI',
+    appId: '1:584975465730:android:1c8fd14ce35c272709161b',
+    messagingSenderId: '584975465730',
+    projectId: 'attendanceproj-15caf',
+    storageBucket: 'attendanceproj-15caf.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB7djN90oMK10wpqNIDdQTaM7mu8IR5z58',
-    appId: '1:352482401977:ios:028e0879bbaeb4190cc568',
-    messagingSenderId: '352482401977',
-    projectId: 'attendance-app-flutter-project',
-    storageBucket: 'attendance-app-flutter-project.appspot.com',
-    iosClientId: '352482401977-hc90moemjl29tfbm3gmcbh62f6ple73a.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAsNc34oyVSio9vLR22a-avHOX8f9IAdVM',
+    appId: '1:584975465730:ios:4fab80fc73bb512b09161b',
+    messagingSenderId: '584975465730',
+    projectId: 'attendanceproj-15caf',
+    storageBucket: 'attendanceproj-15caf.appspot.com',
+    iosClientId: '584975465730-5guei305oauub587tslt1cskaiunaqrh.apps.googleusercontent.com',
     iosBundleId: 'com.example.attendanceApp',
   );
 }
