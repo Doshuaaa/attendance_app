@@ -17,10 +17,11 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
 
   @override
   void initState() {
-    FirebaseProcess process = FirebaseProcess();
-    //process.addStudentData();
+
     super.initState();
     currentSetDay = getToday();
+    FirebaseProcess process = FirebaseProcess(currentSetDay);
+    process.addStudentData();
   }
 
   @override
