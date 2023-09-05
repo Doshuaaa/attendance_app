@@ -1,5 +1,7 @@
 import 'package:attendance_app/drawer.dart';
 import 'package:attendance_app/firebase_process.dart';
+import 'package:attendance_app/student.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -14,14 +16,14 @@ class AttendanceCheckScreen extends StatefulWidget {
 class AttendanceCheckState extends State<AttendanceCheckScreen> {
 
   late String currentSetDay;
+  late FirebaseProcess process;
 
   @override
   void initState() {
 
     super.initState();
     currentSetDay = getToday();
-    FirebaseProcess process = FirebaseProcess(currentSetDay);
-    process.addStudentData();
+    process = FirebaseProcess(currentSetDay);
   }
 
   @override
@@ -38,39 +40,25 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
                 IconButton(onPressed: () {
                   setState(() {
                     currentSetDay = setPreviousDay(currentSetDay);
+                    process = FirebaseProcess(currentSetDay);
+                    process.addStudentData();
                   });
                 }, icon: const Icon(Icons.chevron_left)),
                 TextButton(onPressed: () {datePicker(currentSetDay);}, child: Text(currentSetDay),),
                 IconButton(onPressed: () {
                   setState(() {
                     currentSetDay = setNextDay(currentSetDay);
+                    process = FirebaseProcess(currentSetDay);
+                    process.addStudentData();
                   });
                 }, icon: const Icon(Icons.chevron_right))
               ],
             ),
             Text("출석자 명단"),
             Expanded(
-              // width: double.infinity,
-              //   height: 300,
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${index}번 김하루"),
-                        ElevatedButton(
-                          onPressed: () {
-
-                          },
-                          child: const Text("결석으로 변경"),
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                        )
-                      ],
-                    );
-                  },
-                )
+            //   // width: double.infinity,
+            //   //   height: 300,
+                child: process.getStudentList("출석으로 변경")
             ),
             Text("결석자 명단"),
             Expanded(
@@ -138,3 +126,23 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
     }
   }
 }
+
+// ListView.builder(
+// padding: const EdgeInsets.only(left: 15, right: 15),
+// itemCount: 10,
+// itemBuilder: (BuildContext context, int index) {
+// return Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// Text("${index}번 김하루"),
+// ElevatedButton(
+// onPressed: () {
+//
+// },
+// child: const Text("결석으로 변경"),
+// style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+// )
+// ],
+// );
+// },
+// )

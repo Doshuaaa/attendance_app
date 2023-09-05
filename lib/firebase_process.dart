@@ -1,5 +1,6 @@
 import 'package:attendance_app/student.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseProcess {
 
@@ -24,65 +25,86 @@ class FirebaseProcess {
     if(list.isEmpty) {
       DocumentReference documentRef = await userRef.add({
         "name" : "김하나",
-        "attendance" : true
+        "attendance" : "true"
       });
 
       await userRef.add({
         "name" : "김하나",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "김영석",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "강민수",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "이영희",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "나희라",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "류인석",
-        "attendance" : true
+        "attendance" : "true"
       });
       await userRef.add({
         "name" : "하도윤",
-        "attendance" : true
+        "attendance" : "true"
       });
     }
-    else {
-
-    }
-
 
     //DocumentReference documentRef = ;
   }
 
   void updateStudentAttendance(String num)  {
     DocumentReference docRef = userRef.doc(num);
-    docRef.update({"attendance" : true});
+    docRef.update({"attendance" : "true"});
   }
 
-  List<QueryDocumentSnapshot> getStudentList() {
 
-    userRef.get().then((QuerySnapshot value) {
-      list = value.docs;
-      for (var element in list) {
-        Student student = Student.fromJson(element.data() as Map<String, dynamic>);
-      }
+  FutureBuilder getStudentList(String text)  {
+    List<Student> studentList = List.empty(growable: true);
+    
+    return FutureBuilder(
+      future: getStudentData(),
+      builder: (context, snapshot) {
+        if(snapshot.hasData) {
+          List<QueryDocumentSnapshot<Object?>>? getList = snapshot.data;
+          for (var element in getList!) {
+            studentList.add(Student(name : element.get("name"), attendance : element.get("attendance")));
+          }
+          return ListView.builder(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            itemCount: studentList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${index + 1}번 ${studentList[index].name}"),
+                  ElevatedButton(onPressed: () {
+
+                  }, child: Text(text))
+                ],
+              );
+            },
+          );
+        }
+        return  CircularProgressIndicator();
+      },
+    );
+  }
+
+  Future<List<QueryDocumentSnapshot<Object?>>> getStudentData() async {
+    late List<QueryDocumentSnapshot> studentList;
+    await userRef.get().then((value) {
+      studentList = value.docs;
     });
-    return list;
-  }
 
-  // Future<void> studentDataIsEmpty(String date) {
-  //
-  //
-  //
-  // }
+    return studentList;
+  }
 }

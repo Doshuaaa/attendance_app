@@ -16,7 +16,7 @@ class Student{
         _attendance = json['attendance'],
         _absentReason = json['absentReason'];
 
-  Map<String, dynamic> toJson() => {
+  Map<String, String?> toJson() => {
     'name' : _name,
     'attendance' : _attendance,
     'absentReason' : _absentReason
