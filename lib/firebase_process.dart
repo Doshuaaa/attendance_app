@@ -68,24 +68,21 @@ class FirebaseProcess {
 
 
   FutureBuilder getStudentList(String text)  {
-    List<Student> studentList = List.empty(growable: true);
     
     return FutureBuilder(
       future: getStudentData(),
       builder: (context, snapshot) {
         if(snapshot.hasData) {
           List<QueryDocumentSnapshot<Object?>>? getList = snapshot.data;
-          for (var element in getList!) {
-            studentList.add(Student(name : element.get("name"), attendance : element.get("attendance")));
-          }
+
           return ListView.builder(
             padding: const EdgeInsets.only(left: 15, right: 15),
-            itemCount: studentList.length,
+            itemCount: getList?.length,
             itemBuilder: (BuildContext context, int index) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${index + 1}번 ${studentList[index].name}"),
+                  Text("${index + 1}번 ${getList?.elementAt(index).get("name")}"),
                   ElevatedButton(onPressed: () {
 
                   }, child: Text(text))
