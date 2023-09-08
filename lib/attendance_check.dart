@@ -54,30 +54,9 @@ class AttendanceCheckState extends State<AttendanceCheckScreen> {
                 }, icon: const Icon(Icons.chevron_right))
               ],
             ),
-            Text("출석자 명단"),
             Expanded(
-            //   // width: double.infinity,
-            //   //   height: 300,
-                child: process.getStudentList("출석으로 변경")
-            ),
-            Text("결석자 명단"),
-            Expanded(
-                // width: double.infinity,
-                // height: 300,
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${index}번 김하루"),
-                        ElevatedButton(onPressed: () {}, child: const Text("출석으로 변경"))
-                      ],
-                    );
-                  },
-                )
-            ),
+                child: process.getStudentList()
+            )
           ],
         ),
     );
