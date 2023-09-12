@@ -267,25 +267,4 @@ class FirebaseProcess extends State<AttendanceStateScreen>{
       },
     );
   }
-
 }
-
-// ListView.builder(
-// padding: const EdgeInsets.only(left: 15, right: 15),
-// itemCount: 10,
-// itemBuilder: (BuildContext context, int index) {
-// return Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: [
-// Text("${index}번 김하루"),
-// ElevatedButton(
-// onPressed: () {
-//
-// },
-// child: const Text("결석으로 변경"),
-// style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-// )
-// ],
-// );
-// },
-// )
